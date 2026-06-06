@@ -31,8 +31,8 @@ PREMIUM_CSS = """
         border-radius: 18px; padding: 20px 28px;
         text-align: center; margin-bottom: 24px; backdrop-filter: blur(10px);
     }
-    .page-header h2 { color: #fff; margin: 0 0 4px; font-size: 1.5rem; font-weight: 800; }
-    .page-header p  { color: rgba(255,255,255,0.4); margin: 0; font-size: 0.85rem; }
+    .page-header h2 { color: #fff !important; margin: 0 0 4px; font-size: 1.5rem; font-weight: 800; }
+    .page-header p  { color: rgba(255,255,255,0.4) !important; margin: 0; font-size: 0.85rem; }
 
     /* MÉTRICAS */
     .metric-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 16px 0; }
@@ -41,45 +41,26 @@ PREMIUM_CSS = """
         border-radius: 16px; padding: 18px 12px; text-align: center;
     }
     .metric-card .num { font-size: 2rem; font-weight: 800; line-height: 1; }
-    .metric-card .lbl { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 5px; }
-    .metric-card.blue   .num { color: #60a5fa; }
-    .metric-card.purple .num { color: #a78bfa; }
-    .metric-card.green  .num { color: #34d399; }
-    .metric-card.gold   .num { color: #fbbf24; }
+    .metric-card .lbl { font-size: 0.75rem; color: rgba(255,255,255,0.45) !important; margin-top: 5px; }
+    .metric-card.blue   .num { color: #60a5fa !important; }
+    .metric-card.purple .num { color: #a78bfa !important; }
+    .metric-card.green  .num { color: #34d399 !important; }
+    .metric-card.gold   .num { color: #fbbf24 !important; }
 
-    /* INPUTS — fundo escuro + texto branco visível */
-    .stTextInput > div > div > input {
-        background: rgba(255,255,255,0.08) !important;
-        border: 1px solid rgba(255,255,255,0.18) !important;
-        border-radius: 10px !important;
-        color: #f1f5f9 !important;
-        caret-color: #60a5fa !important;
-    }
-    .stTextInput > div > div > input::placeholder { color: rgba(255,255,255,0.3) !important; }
-    .stTextInput > div > div > input:focus {
-        border-color: #3b82f6 !important;
-        box-shadow: 0 0 0 2px rgba(59,130,246,0.25) !important;
-        background: rgba(255,255,255,0.11) !important;
-    }
-    /* Selectbox */
-    .stSelectbox > div > div,
-    .stSelectbox > div > div > div {
-        background: rgba(255,255,255,0.08) !important;
-        border: 1px solid rgba(255,255,255,0.18) !important;
-        border-radius: 10px !important;
-        color: #f1f5f9 !important;
-    }
-    /* Date input */
-    .stDateInput > div > div > input {
-        background: rgba(255,255,255,0.08) !important;
-        border: 1px solid rgba(255,255,255,0.18) !important;
-        border-radius: 10px !important;
-        color: #f1f5f9 !important;
-    }
-    /* Labels */
-    label, .stTextInput label, .stSelectbox label,
-    .stDateInput label, .stRadio label p,
-    p, span { color: rgba(255,255,255,0.75) !important; }
+    /* ── INPUTS CORRIGIDOS ── */
+    .stSelectbox > div > div { background: rgba(255,255,255,0.08) !important; border: 1px solid rgba(255,255,255,0.18) !important; border-radius: 10px !important; }
+    .stSelectbox > div > div > div[data-baseweb="select"] > div { background: transparent !important; color: #f1f5f9 !important; }
+    .stSelectbox span, .stSelectbox div { color: #f1f5f9 !important; }
+    [data-baseweb="select"] * { color: #f1f5f9 !important; background: transparent !important; }
+    [data-baseweb="popover"] [role="option"] { background: #1a2d45 !important; color: #f1f5f9 !important; }
+    [data-baseweb="popover"] [role="option"]:hover { background: #2a3d55 !important; }
+    .stTextInput input { background: rgba(255,255,255,0.08) !important; border: 1px solid rgba(255,255,255,0.18) !important; border-radius: 10px !important; color: #f1f5f9 !important; caret-color: #60a5fa !important; }
+    .stTextInput input::placeholder { color: rgba(255,255,255,0.3) !important; }
+    .stTextInput input:focus { border-color: #3b82f6 !important; box-shadow: 0 0 0 2px rgba(59,130,246,0.25) !important; }
+    .stDateInput input { background: rgba(255,255,255,0.08) !important; border: 1px solid rgba(255,255,255,0.18) !important; border-radius: 10px !important; color: #f1f5f9 !important; }
+    label { color: rgba(255,255,255,0.75) !important; }
+    p { color: rgba(255,255,255,0.75) !important; }
+
     /* Radio */
     .stRadio > div { flex-direction: row; gap: 12px; }
     .stRadio > div > label {
@@ -87,6 +68,11 @@ PREMIUM_CSS = """
         border: 1px solid rgba(255,255,255,0.12) !important;
         border-radius: 10px !important; padding: 8px 16px !important;
         color: rgba(255,255,255,0.7) !important;
+        transition: all 0.2s ease !important;
+    }
+    .stRadio > div > label:hover {
+        background: rgba(59,130,246,0.15) !important;
+        border-color: rgba(59,130,246,0.4) !important;
     }
 
     /* Lista presença */
@@ -109,13 +95,14 @@ PREMIUM_CSS = """
         font-size: 0.93rem !important; font-weight: 700 !important;
         width: 100% !important; letter-spacing: 0.3px !important;
         box-shadow: 0 4px 20px rgba(59,130,246,0.3) !important;
-        transition: all 0.25s cubic-bezier(0.34,1.56,0.64,1) !important;
+        transition: all 0.22s cubic-bezier(0.34,1.56,0.64,1) !important;
     }
     div.stButton > button:hover {
         background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%) !important;
-        box-shadow: 0 8px 28px rgba(59,130,246,0.5) !important;
+        box-shadow: 0 8px 30px rgba(59,130,246,0.5) !important;
         transform: translateY(-2px) scale(1.01) !important;
     }
+    div.stButton > button:active { transform: translateY(0) scale(0.99) !important; }
     /* Botão voltar */
     div.stButton:first-of-type > button {
         background: rgba(255,255,255,0.07) !important;
@@ -130,7 +117,7 @@ PREMIUM_CSS = """
     }
 
     .section-title {
-        color: rgba(255,255,255,0.85); font-size: 0.8rem; font-weight: 700;
+        color: rgba(255,255,255,0.85) !important; font-size: 0.8rem; font-weight: 700;
         text-transform: uppercase; letter-spacing: 1.5px;
         margin: 24px 0 12px; padding-bottom: 8px;
         border-bottom: 1px solid rgba(255,255,255,0.08);
@@ -173,7 +160,7 @@ else:
             data_srv = st.date_input("Data:", value=date.today())
         with col2:
             tipo_opcao = st.selectbox("Tipo (base):", TIPOS_PADRAO)
-        tipo_srv = st.text_input("Editar tipo (opcional):", value=tipo_opcao, placeholder="Ex: Culto Especial de Natal", help="Personalize o nome livremente.")
+        tipo_srv = st.text_input("Editar tipo (opcional):", value=tipo_opcao, placeholder="Ex: Culto Especial de Natal")
         col3, col4 = st.columns(2)
         with col3:
             local_srv = st.text_input("Local:")
