@@ -1,13 +1,12 @@
 [theme]
-base = "light"
-primaryColor = "#1a5276"
-backgroundColor = "#f0f4f8"
-secondaryBackgroundColor = "#ffffff"
-textColor = "#1a1a2e"
-font = "sans serif"
-
-[client]
-showSidebarNavigation = false
+base = "dark"
+backgroundColor = "#0f1923"
+secondaryBackgroundColor = "#1a2d45"
+primaryColor = "#3b82f6"
+textColor = "#e2e8f0"
 
 [server]
-runOnSave = true
+headless = true
+
+[browser]
+gatherUsageStats = false

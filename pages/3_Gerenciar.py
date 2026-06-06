@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 from utils.supabase_client import listar_servicos, listar_presenca, deletar_presenca
 
 st.set_page_config(page_title="Gerenciar", page_icon="⚙️", layout="centered", initial_sidebar_state="collapsed")
@@ -8,11 +7,18 @@ PREMIUM_CSS = """
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
     * { font-family: 'Inter', sans-serif !important; }
-    [data-testid="stSidebar"] { display: none !important; }
+    [data-testid="stSidebar"]        { display: none !important; }
     [data-testid="collapsedControl"] { display: none !important; }
+    [data-testid="stHeader"]         { display: none !important; }
+    [data-testid="stToolbar"]        { display: none !important; }
+    [data-testid="stDecoration"]     { display: none !important; }
+    .stApp > header                  { display: none !important; }
     footer { visibility: hidden; } #MainMenu { visibility: hidden; }
-    .stApp { background: linear-gradient(135deg, #0f1923 0%, #1a2d45 50%, #0f1923 100%) !important; }
-    .block-container { padding-top: 1.5rem !important; }
+    html, body, .stApp, [data-testid="stAppViewContainer"],
+    [data-testid="stMain"], .main, .block-container {
+        background: linear-gradient(135deg, #0f1923 0%, #1a2d45 50%, #0f1923 100%) !important;
+    }
+    .block-container { padding-top: 1.5rem !important; max-width: 860px !important; }
 
     .page-header {
         background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
@@ -28,8 +34,16 @@ PREMIUM_CSS = """
         margin: 24px 0 12px; padding-bottom: 8px;
         border-bottom: 1px solid rgba(255,255,255,0.08);
     }
-    .stSelectbox > div > div { background: rgba(255,255,255,0.07) !important; border: 1px solid rgba(255,255,255,0.12) !important; border-radius: 10px !important; color: #fff !important; }
-    label { color: rgba(255,255,255,0.7) !important; }
+
+    /* Inputs */
+    .stSelectbox > div > div,
+    .stSelectbox > div > div > div {
+        background: rgba(255,255,255,0.08) !important;
+        border: 1px solid rgba(255,255,255,0.18) !important;
+        border-radius: 10px !important;
+        color: #f1f5f9 !important;
+    }
+    label, p, span { color: rgba(255,255,255,0.75) !important; }
 
     .pres-item {
         background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
@@ -55,14 +69,14 @@ PREMIUM_CSS = """
         box-shadow: 0 8px 28px rgba(59,130,246,0.5) !important;
         transform: translateY(-2px) scale(1.01) !important;
     }
-    div.stButton:first-child > button {
+    div.stButton:first-of-type > button {
         background: rgba(255,255,255,0.07) !important;
         color: rgba(255,255,255,0.8) !important;
-        border: 1px solid rgba(255,255,255,0.12) !important;
+        border: 1px solid rgba(255,255,255,0.15) !important;
         box-shadow: none !important; font-size: 0.85rem !important;
-        padding: 10px 16px !important; width: auto !important;
+        padding: 10px 18px !important; width: auto !important;
     }
-    div.stButton:first-child > button:hover {
+    div.stButton:first-of-type > button:hover {
         background: rgba(255,255,255,0.12) !important;
         transform: translateY(-1px) !important; box-shadow: none !important;
     }
@@ -98,10 +112,10 @@ presencas = listar_presenca(servico_id)
 if not presencas:
     st.info("Nenhuma presença registrada neste serviço.")
 else:
-    badge_map = {"Músico": "badge-musico", "Organista": "badge-organista", "Irmandade": "badge-irmandade"}
+    badge_map = {"Músico":"badge-musico","Organista":"badge-organista","Irmandade":"badge-irmandade"}
     for p in presencas:
-        badge = badge_map.get(p['funcao'], "badge-irmandade")
-        col1, col2 = st.columns([5, 1])
+        badge = badge_map.get(p['funcao'],"badge-irmandade")
+        col1, col2 = st.columns([5,1])
         with col1:
             st.markdown(f"""
             <div class="pres-item">

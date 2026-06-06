@@ -11,68 +11,97 @@ PREMIUM_CSS = """
 <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
     * { font-family: 'Inter', sans-serif !important; }
-    [data-testid="stSidebar"] { display: none !important; }
+
+    [data-testid="stSidebar"]        { display: none !important; }
     [data-testid="collapsedControl"] { display: none !important; }
+    [data-testid="stHeader"]         { display: none !important; }
+    [data-testid="stToolbar"]        { display: none !important; }
+    [data-testid="stDecoration"]     { display: none !important; }
+    .stApp > header                  { display: none !important; }
     footer { visibility: hidden; } #MainMenu { visibility: hidden; }
-    .stApp { background: linear-gradient(135deg, #0f1923 0%, #1a2d45 50%, #0f1923 100%) !important; }
-    .block-container { padding-top: 1.5rem !important; }
+
+    html, body, .stApp, [data-testid="stAppViewContainer"],
+    [data-testid="stMain"], .main, .block-container {
+        background: linear-gradient(135deg, #0f1923 0%, #1a2d45 50%, #0f1923 100%) !important;
+    }
+    .block-container { padding-top: 1.5rem !important; max-width: 860px !important; }
 
     .page-header {
-        background: rgba(255,255,255,0.05);
-        border: 1px solid rgba(255,255,255,0.1);
+        background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
         border-radius: 18px; padding: 20px 28px;
-        text-align: center; margin-bottom: 24px;
-        backdrop-filter: blur(10px);
+        text-align: center; margin-bottom: 24px; backdrop-filter: blur(10px);
     }
     .page-header h2 { color: #fff; margin: 0 0 4px; font-size: 1.5rem; font-weight: 800; }
     .page-header p  { color: rgba(255,255,255,0.4); margin: 0; font-size: 0.85rem; }
 
-    /* Métrica premium */
+    /* MÉTRICAS */
     .metric-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; margin: 16px 0; }
     .metric-card {
-        background: rgba(255,255,255,0.06);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 16px; padding: 18px 12px;
-        text-align: center;
-        backdrop-filter: blur(8px);
+        background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 16px; padding: 18px 12px; text-align: center;
     }
-    .metric-card .num { font-size: 2rem; font-weight: 800; color: #fff; line-height: 1; }
+    .metric-card .num { font-size: 2rem; font-weight: 800; line-height: 1; }
     .metric-card .lbl { font-size: 0.75rem; color: rgba(255,255,255,0.45); margin-top: 5px; }
-    .metric-card.blue  .num { color: #60a5fa; }
+    .metric-card.blue   .num { color: #60a5fa; }
     .metric-card.purple .num { color: #a78bfa; }
     .metric-card.green  .num { color: #34d399; }
     .metric-card.gold   .num { color: #fbbf24; }
 
-    /* Presença list */
+    /* INPUTS — fundo escuro + texto branco visível */
+    .stTextInput > div > div > input {
+        background: rgba(255,255,255,0.08) !important;
+        border: 1px solid rgba(255,255,255,0.18) !important;
+        border-radius: 10px !important;
+        color: #f1f5f9 !important;
+        caret-color: #60a5fa !important;
+    }
+    .stTextInput > div > div > input::placeholder { color: rgba(255,255,255,0.3) !important; }
+    .stTextInput > div > div > input:focus {
+        border-color: #3b82f6 !important;
+        box-shadow: 0 0 0 2px rgba(59,130,246,0.25) !important;
+        background: rgba(255,255,255,0.11) !important;
+    }
+    /* Selectbox */
+    .stSelectbox > div > div,
+    .stSelectbox > div > div > div {
+        background: rgba(255,255,255,0.08) !important;
+        border: 1px solid rgba(255,255,255,0.18) !important;
+        border-radius: 10px !important;
+        color: #f1f5f9 !important;
+    }
+    /* Date input */
+    .stDateInput > div > div > input {
+        background: rgba(255,255,255,0.08) !important;
+        border: 1px solid rgba(255,255,255,0.18) !important;
+        border-radius: 10px !important;
+        color: #f1f5f9 !important;
+    }
+    /* Labels */
+    label, .stTextInput label, .stSelectbox label,
+    .stDateInput label, .stRadio label p,
+    p, span { color: rgba(255,255,255,0.75) !important; }
+    /* Radio */
+    .stRadio > div { flex-direction: row; gap: 12px; }
+    .stRadio > div > label {
+        background: rgba(255,255,255,0.06) !important;
+        border: 1px solid rgba(255,255,255,0.12) !important;
+        border-radius: 10px !important; padding: 8px 16px !important;
+        color: rgba(255,255,255,0.7) !important;
+    }
+
+    /* Lista presença */
     .pres-item {
-        background: rgba(255,255,255,0.04);
-        border: 1px solid rgba(255,255,255,0.08);
-        border-radius: 10px; padding: 10px 16px;
-        margin-bottom: 6px;
+        background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+        border-radius: 10px; padding: 10px 16px; margin-bottom: 6px;
         display: flex; align-items: center; gap: 10px;
         color: rgba(255,255,255,0.75); font-size: 0.88rem;
     }
-    .pres-badge {
-        font-size: 0.7rem; font-weight: 700; padding: 3px 9px;
-        border-radius: 20px; white-space: nowrap;
-    }
-    .badge-musico   { background: rgba(59,130,246,0.2);  color: #93c5fd; border: 1px solid rgba(59,130,246,0.3); }
-    .badge-organista{ background: rgba(167,139,250,0.2); color: #c4b5fd; border: 1px solid rgba(167,139,250,0.3); }
-    .badge-irmandade{ background: rgba(52,211,153,0.2);  color: #6ee7b7; border: 1px solid rgba(52,211,153,0.3); }
+    .pres-badge { font-size: 0.7rem; font-weight: 700; padding: 3px 9px; border-radius: 20px; white-space: nowrap; }
+    .badge-musico    { background: rgba(59,130,246,0.2);  color: #93c5fd; border: 1px solid rgba(59,130,246,0.3); }
+    .badge-organista { background: rgba(167,139,250,0.2); color: #c4b5fd; border: 1px solid rgba(167,139,250,0.3); }
+    .badge-irmandade { background: rgba(52,211,153,0.2);  color: #6ee7b7; border: 1px solid rgba(52,211,153,0.3); }
 
-    /* Inputs e forms */
-    .stTextInput > div > div > input,
-    .stSelectbox > div > div {
-        background: rgba(255,255,255,0.07) !important;
-        border: 1px solid rgba(255,255,255,0.12) !important;
-        border-radius: 10px !important;
-        color: #fff !important;
-    }
-    .stTextInput label, .stSelectbox label,
-    .stDateInput label, .stRadio label p,
-    .stTextInput > label, label { color: rgba(255,255,255,0.7) !important; }
-
-    /* Buttons */
+    /* BUTTONS */
     div.stButton > button {
         background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%) !important;
         color: white !important; border: none !important;
@@ -88,19 +117,16 @@ PREMIUM_CSS = """
         transform: translateY(-2px) scale(1.01) !important;
     }
     /* Botão voltar */
-    div.stButton:first-child > button {
+    div.stButton:first-of-type > button {
         background: rgba(255,255,255,0.07) !important;
         color: rgba(255,255,255,0.8) !important;
-        border: 1px solid rgba(255,255,255,0.12) !important;
-        box-shadow: none !important;
-        font-size: 0.85rem !important;
-        padding: 10px 16px !important;
-        width: auto !important;
+        border: 1px solid rgba(255,255,255,0.15) !important;
+        box-shadow: none !important; font-size: 0.85rem !important;
+        padding: 10px 18px !important; width: auto !important;
     }
-    div.stButton:first-child > button:hover {
+    div.stButton:first-of-type > button:hover {
         background: rgba(255,255,255,0.12) !important;
-        transform: translateY(-1px) !important;
-        box-shadow: none !important;
+        transform: translateY(-1px) !important; box-shadow: none !important;
     }
 
     .section-title {
@@ -111,13 +137,6 @@ PREMIUM_CSS = """
     }
     .stAlert { border-radius: 12px !important; }
     hr { border-color: rgba(255,255,255,0.08) !important; }
-    .stRadio > div { flex-direction: row; gap: 12px; }
-    .stRadio > div > label {
-        background: rgba(255,255,255,0.05) !important;
-        border: 1px solid rgba(255,255,255,0.1) !important;
-        border-radius: 10px !important; padding: 8px 16px !important;
-        color: rgba(255,255,255,0.7) !important;
-    }
 </style>
 """
 st.markdown(PREMIUM_CSS, unsafe_allow_html=True)
@@ -132,12 +151,10 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ── Serviço ──────────────────────────────────────────────────────────────────
-st.markdown('<div class="section-title">① Selecione ou crie um serviço</div>', unsafe_allow_html=True)
-
 servicos = listar_servicos()
 opcoes = {f"{s['data']} — {s['tipo']} | {s.get('local','') or 'Sem local'}": s['id'] for s in servicos}
 
+st.markdown('<div class="section-title">① Selecione ou crie um serviço</div>', unsafe_allow_html=True)
 aba = st.radio("", ["Selecionar existente", "Criar novo serviço"], horizontal=True)
 
 servico_id = None
@@ -149,31 +166,19 @@ if aba == "Selecionar existente":
     else:
         st.warning("Nenhum serviço cadastrado. Crie um novo.")
 else:
-    TIPOS_PADRAO = [
-        "Culto de Semana", "Culto de Sábado",
-        "Culto de Domingo", "Reunião de Oração",
-        "Reunião de Jovens", "Outro"
-    ]
+    TIPOS_PADRAO = ["Culto de Semana","Culto de Sábado","Culto de Domingo","Reunião de Oração","Reunião de Jovens","Outro"]
     with st.form("form_servico"):
         col1, col2 = st.columns(2)
         with col1:
             data_srv = st.date_input("Data:", value=date.today())
         with col2:
             tipo_opcao = st.selectbox("Tipo (base):", TIPOS_PADRAO)
-
-        # Campo editável para personalizar o tipo
-        tipo_srv = st.text_input(
-            "Editar tipo (opcional):",
-            value=tipo_opcao,
-            placeholder="Ex: Culto Especial de Natal",
-            help="Você pode personalizar o nome do tipo livremente."
-        )
+        tipo_srv = st.text_input("Editar tipo (opcional):", value=tipo_opcao, placeholder="Ex: Culto Especial de Natal", help="Personalize o nome livremente.")
         col3, col4 = st.columns(2)
         with col3:
             local_srv = st.text_input("Local:")
         with col4:
             obs_srv = st.text_input("Observação:")
-
         if st.form_submit_button("✅ Criar Serviço", use_container_width=True):
             tipo_final = tipo_srv.strip() if tipo_srv.strip() else tipo_opcao
             resultado = criar_servico(str(data_srv), tipo_final, local_srv, obs_srv)
@@ -183,7 +188,6 @@ else:
 
 st.markdown("<hr>", unsafe_allow_html=True)
 
-# ── Contagem e registros ──────────────────────────────────────────────────────
 if servico_id:
     contagem = contar_por_funcao(servico_id)
     total    = sum(contagem.values())
@@ -191,12 +195,11 @@ if servico_id:
     st.markdown('<div class="section-title">② Contagem atual</div>', unsafe_allow_html=True)
     st.markdown(f"""
     <div class="metric-row">
-        <div class="metric-card blue"><div class="num">{contagem['Músico']}</div><div class="lbl">🎵 Músicos</div></div>
-        <div class="metric-card purple"><div class="num">{contagem['Organista']}</div><div class="lbl">🎹 Organistas</div></div>
-        <div class="metric-card green"><div class="num">{contagem['Irmandade']}</div><div class="lbl">🙏 Irmandade</div></div>
-        <div class="metric-card gold"><div class="num">{total}</div><div class="lbl">👥 Total</div></div>
-    </div>
-    """, unsafe_allow_html=True)
+        <div class="metric-card blue">  <div class="num">{contagem['Músico']}</div>   <div class="lbl">🎵 Músicos</div></div>
+        <div class="metric-card purple"><div class="num">{contagem['Organista']}</div> <div class="lbl">🎹 Organistas</div></div>
+        <div class="metric-card green"> <div class="num">{contagem['Irmandade']}</div><div class="lbl">🙏 Irmandade</div></div>
+        <div class="metric-card gold">  <div class="num">{total}</div>               <div class="lbl">👥 Total</div></div>
+    </div>""", unsafe_allow_html=True)
 
     st.markdown('<div class="section-title">③ Adicionar presença</div>', unsafe_allow_html=True)
     with st.form("form_presenca", clear_on_submit=True):
@@ -218,9 +221,9 @@ if servico_id:
     st.markdown('<div class="section-title">④ Lista de presenças</div>', unsafe_allow_html=True)
     presencas = listar_presenca(servico_id)
     if presencas:
-        badge_map = {"Músico": "badge-musico", "Organista": "badge-organista", "Irmandade": "badge-irmandade"}
+        badge_map = {"Músico":"badge-musico","Organista":"badge-organista","Irmandade":"badge-irmandade"}
         for p in presencas:
-            badge = badge_map.get(p['funcao'], "badge-irmandade")
+            badge = badge_map.get(p['funcao'],"badge-irmandade")
             st.markdown(f"""
             <div class="pres-item">
                 <span style="flex:1">👤 <strong style="color:#fff">{p['nome']}</strong></span>
