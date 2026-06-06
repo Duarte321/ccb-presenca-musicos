@@ -1,14 +1,14 @@
 -- ============================================
--- CCB - Sistema de Presença
--- Script de criação do banco de dados
--- Execute no SQL Editor do Supabase
+-- CCB - Sistema de Presença de Músicos
+-- Projeto: ccb-presenca-musicos
+-- Supabase URL: https://ovnwnzqjjjtfqjodvusi.supabase.co
 -- ============================================
 
 -- Tabela de serviços (cultos)
 CREATE TABLE IF NOT EXISTS servicos (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   data DATE NOT NULL,
-  tipo TEXT NOT NULL,  -- 'Culto de Semana', 'Culto de Sábado', 'Reunião de Oração', etc.
+  tipo TEXT NOT NULL,
   local TEXT,
   observacao TEXT,
   criado_em TIMESTAMPTZ DEFAULT NOW()
@@ -25,30 +25,22 @@ CREATE TABLE IF NOT EXISTS presenca (
   registrado_em TIMESTAMPTZ DEFAULT NOW()
 );
 
--- Índices para melhorar a performance das consultas
+-- Índices para performance
 CREATE INDEX IF NOT EXISTS idx_presenca_servico_id ON presenca(servico_id);
 CREATE INDEX IF NOT EXISTS idx_presenca_funcao ON presenca(funcao);
 CREATE INDEX IF NOT EXISTS idx_servicos_data ON servicos(data);
 
--- Habilitar Row Level Security (RLS)
+-- Habilitar RLS
 ALTER TABLE servicos ENABLE ROW LEVEL SECURITY;
 ALTER TABLE presenca ENABLE ROW LEVEL SECURITY;
 
--- Políticas de acesso público (ajuste conforme necessidade)
-CREATE POLICY "Leitura pública de serviços"
-  ON servicos FOR SELECT USING (true);
+-- Políticas de acesso
+CREATE POLICY "Leitura publica de servicos" ON servicos FOR SELECT USING (true);
+CREATE POLICY "Insercao publica de servicos" ON servicos FOR INSERT WITH CHECK (true);
+CREATE POLICY "Delecao publica de servicos" ON servicos FOR DELETE USING (true);
+CREATE POLICY "Atualizacao publica de servicos" ON servicos FOR UPDATE USING (true);
 
-CREATE POLICY "Inserção pública de serviços"
-  ON servicos FOR INSERT WITH CHECK (true);
-
-CREATE POLICY "Deleção pública de serviços"
-  ON servicos FOR DELETE USING (true);
-
-CREATE POLICY "Leitura pública de presença"
-  ON presenca FOR SELECT USING (true);
-
-CREATE POLICY "Inserção pública de presença"
-  ON presenca FOR INSERT WITH CHECK (true);
-
-CREATE POLICY "Deleção pública de presença"
-  ON presenca FOR DELETE USING (true);
+CREATE POLICY "Leitura publica de presenca" ON presenca FOR SELECT USING (true);
+CREATE POLICY "Insercao publica de presenca" ON presenca FOR INSERT WITH CHECK (true);
+CREATE POLICY "Delecao publica de presenca" ON presenca FOR DELETE USING (true);
+CREATE POLICY "Atualizacao publica de presenca" ON presenca FOR UPDATE USING (true);
